@@ -9,7 +9,7 @@ function JobCard(props) {
                 <div className="company-info-container">
                     <p className="company-name">{props.company} {props.new && <span className='new'>NEW!</span>}{props.featured && <span className='featured'>FEATURED</span>}</p>
                     <h2 className="job-position">{props.position}</h2>
-                    <p className="job-data">{props.postedAt}   ●   {props.contract}   ●   {props.location} </p>
+                    <p className="job-data">{props.postedAt}&emsp;●&emsp;{props.contract}&emsp;●&emsp;{props.location} </p>
                 </div>
             </div>
             <div className="right-side">

@@ -74,7 +74,7 @@
 .new, .featured {
     background-color: var(--dark-cyan);
     color: white;
-    font-size: 0.8rem;
+    font-size: 0.7rem;
     padding: 0.3rem 0.5rem;
     border-radius: 0.6rem;
     font-weight: 500;
