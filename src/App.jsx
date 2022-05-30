@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import FilterBar from './components/FilterBar/FilterBar';
 import JobsList from './components/JobsList/JobsList'
 import Data from './data.json';
@@ -25,27 +25,53 @@ function App() {
   }
 
   function grandParentFunction3(item) {
-    sethasLanguage(true);
-    sethasFilter(true);
+    
     if (!languageFilter.includes(item)) {
-      languageFilter.push(item);
+      sethasLanguage(true);
+      sethasFilter(true);
+      setlanguageFilter(languageFilter.concat([item]));
+    }
+  }
+  
+
+  function removeRole() {
+    setroleFilter("");
+    if (levelFilter === "" && hasLanguage === false) {
+      sethasFilter(false);
     }
   }
 
-  console.log(languageFilter)
+  function removeLevel() {
+    setlevelFilter("");
+    if (roleFilter === "" && hasLanguage === false) {
+      sethasFilter(false);
+    }
+  }
+
+  function removeLanguage(index) {
+    const newArray = languageFilter.filter((item) => item !== index);
+    setlanguageFilter(newArray);
+    if (newArray.length === 0) {
+      sethasLanguage(false);
+      if (levelFilter === false && roleFilter === false) {
+        sethasFilter(false);
+      }
+    }
+  }
+
 
   function clear() {
     sethasFilter(false);
     sethasLanguage(false);
     setlevelFilter("");
     setroleFilter("");
-    setlanguageFilter([""]);
+    setlanguageFilter([]);
   }
 
   return (
     <div className="app-container">
       <img src="./images/bg-header-desktop.svg" alt="Bg" className='bg'/>
-      <FilterBar hasFilter={hasFilter} clear={clear} languageFilter={languageFilter} roleFilter={roleFilter} levelFilter={levelFilter}  />
+      <FilterBar removeRole={removeRole} removeLevel={removeLevel} removeLanguage={removeLanguage} hasFilter={hasFilter} clear={clear} languageFilter={languageFilter} hasLanguage={hasLanguage} roleFilter={roleFilter} levelFilter={levelFilter}  />
       <JobsList parentCallback={grandParentFunction} parentCallback2={grandParentFunction2} parentCallback3={grandParentFunction3} data={Data} hasFilter={hasFilter} hasLanguage={hasLanguage} languageFilter={languageFilter} roleFilter={roleFilter} levelFilter={levelFilter}/>
     </div>
   );

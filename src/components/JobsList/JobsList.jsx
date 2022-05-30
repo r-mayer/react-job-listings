@@ -3,10 +3,10 @@ import './JobsList.css';
 
 function JobsList(props) {
 
-    if (props.hasFilter == false) {
+    if (props.hasFilter === false) {
         var dados = props.data;                
     } else {
-        if (props.hasLanguage == false) {
+        if (props.hasLanguage === false) {
             var dados = props.data.filter(item => 
                 (
                     (item.role.includes(props.roleFilter))
@@ -16,13 +16,14 @@ function JobsList(props) {
         } else {
             var dados = props.data.filter(item => 
                 (
-                    (item.languages.includes(props.languageFilter[0])  || item.languages.includes(props.languageFilter[1]))
+                    item.languages.some(elem => (elem === props.languageFilter[0] || elem === props.languageFilter[1] || elem === props.languageFilter[2]))
                     && (item.role.includes(props.roleFilter))
                     && (item.level.includes(props.levelFilter))
                 )
             );
         }
     }
+
 
     return(
         <div className="jobs-list-container">
